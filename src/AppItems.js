@@ -2,38 +2,57 @@ import React from "react";
 import Button from '@mui/material/Button';
 import './App.css';
 import DeleteIcon from '@mui/icons-material/Delete';
+import Checkbox from '@mui/material/Checkbox';
+import TableRow from '@mui/material/TableRow';
+import TableHead  from "@mui/material/TableHead";
+import TableContainer  from "@mui/material/TableContainer";
+import TableCell from '@mui/material/TableCell';
 
 
 class AppItems extends React.Component {
+    constructor(props){
+        super(props);
 
+        this.state={
+            items:this.props.items,
+            click: false
+        }
+
+        this.linetroughText = this.linetroughText.bind(this);
+    }
+
+    linetroughText(){
+        this.setState({ click:!this.state.click });
+    }
     render(){
-        var items = this.props.items;
-
-
-        var tableHeader = 
-            <tr className="tableHead">
-                <th className="taskitem">Task</th>
-                <th>(X)</th>
-            </tr>;
+        const textClass = this.state.click ? "taskItem-linethrough" : "taskItem";
+        const items = this.props.items;
+        let tableHeader = 
+            <TableHead className="tableHead">
+                <TableRow>
+                    <TableCell className="taskitem">Task</TableCell>
+                    <TableCell>(X)</TableCell>
+                </TableRow>
+            </TableHead>;
         
         if(items.length === 0){
             tableHeader = '';
         }
 
-        var list = items.map((item,index) => {
-            return <tr>
-                <td className="taskItem" key={index}>{item}</td>
-                <td>
+        const list = items.map((item,index) => {
+            return <TableRow>
+                <TableCell className={textClass} key={index}><Checkbox onClick={this.linetroughText}/>{item}</TableCell>
+                <TableCell>
                     <Button className="remove" onClick={this.props.deleteItems.bind(this,index)} variant="outlined" color="error" startIcon={<DeleteIcon />}>X</Button>
-                </td>
-            </tr>
+                </TableCell>
+            </TableRow>
         });
 
         return(
-            <table className="taskTable" >
+            <TableContainer className="taskTable" >
                 {tableHeader}
                 {list}
-            </table>
+            </TableContainer>
         
         )
 
