@@ -4,15 +4,13 @@ import Button from '@mui/material/Button';
 import './App.css';
 
 
-var initialArray = [];
-
 class ControlElement extends React.Component{
 
     constructor(props){
         super(props);
 
         this.state = {
-            items: initialArray,
+            items: [],
             newItem: ''
         }
 
