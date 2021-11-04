@@ -26,9 +26,8 @@ class ControlElement extends React.Component{
 
 
     deleteItems(number,event){
-        var cloneState = this.state.items.slice();
-        cloneState.splice(number,1);
-        this.setState({ items: cloneState });
+        const filterArray = this.state.items.filter(item => this.state.items.indexOf(item) !== number);
+        this.setState({ items:filterArray });
     }
 
     handleChange(event){
