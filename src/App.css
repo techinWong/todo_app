@@ -33,6 +33,10 @@ table{
   padding-left:25px;
 }
 
+.linethrough{
+  text-decoration: line-through;
+}
+
 
 
 
