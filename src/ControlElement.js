@@ -11,19 +11,26 @@ class ControlElement extends React.Component{
 
         this.state = {
             items: [],
-            newItem: ''
+            newItem: {}
         }
 
         this.clear = this.clear.bind(this);
         this.deleteItems= this.deleteItems.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.completeItems = this.completeItems.bind(this);
+
     }
 
     clear(){
         this.setState({ items: []});
     }
 
+    completeItems(index) {
+        let item = this.state.items;
+        item[index].click = !item[index].click
+        this.setState({ items: item })
+    }
 
     deleteItems(number,event){
         const filterArray = this.state.items.filter(item => this.state.items.indexOf(item) !== number);
@@ -31,14 +38,14 @@ class ControlElement extends React.Component{
     }
 
     handleChange(event){
-        this.setState({newItem:event.target.value});
+        this.setState({newItem:{title:event.target.value , click:false}});
     }
 
     handleSubmit(event){
         event.preventDefault();
-        if(this.state.newItem.length > 0){
+        if(this.state.newItem.title.length > 0){
             this.state.items.unshift(this.state.newItem);
-            this.setState({newItem:''})
+            this.setState({newItem:{title:''}})
         }
     }
 
@@ -51,7 +58,7 @@ class ControlElement extends React.Component{
                         type="text"
                         placeholder="Create new work item"
                         onChange={this.handleChange}
-                        value={this.state.newItem}
+                        value={this.state.newItem.title}
                     />
                     <br/>
                     <Button className="enter" type="submit" variant="contained">Add</Button>
@@ -59,6 +66,7 @@ class ControlElement extends React.Component{
                 <AppItems
                     items={this.state.items}
                     deleteItems={this.deleteItems}
+                    completeItems={this.completeItems}
                 />
                 <Button className="clear" onClick={this.clear} variant="outlined">Clear the List</Button>
             </div>

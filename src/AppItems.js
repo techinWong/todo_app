@@ -15,17 +15,9 @@ class AppItems extends React.Component {
 
         this.state = {
             items: this.props.items,
-            click: Array(this.props.items.length).fill(false)
         }
-        this.linethroughText = this.completeItems.bind(this);
     }
-
-    completeItems(index) {
-        let newClick = this.state.click;
-        newClick[index] = !newClick[index];
-        this.setState({ click: newClick })
-    }
-    
+  
     render() {
         var items = this.props.items;
         var tableHeader =
@@ -43,8 +35,8 @@ class AppItems extends React.Component {
 
         var list = items.map((item, index) => {
             return <TableRow>
-                <TableCell> <Checkbox onClick={() => this.completeItems(index)} /></TableCell>
-                <TableCell className={`taskItem ${this.state.click[index] ? "linethrough" : ""}`} key={index.toString()}>{item}</TableCell>
+                <TableCell> <Checkbox onClick={this.props.completeItems.bind(this,index)} checked={item.click}/></TableCell>
+                <TableCell className={`taskItem ${item.click ? "linethrough" : ""}`} key={index.toString()}>{item.title}</TableCell>
                 <TableCell>
                     <Button className="remove" onClick={this.props.deleteItems.bind(this, index)} variant="outlined" color="error" startIcon={<DeleteIcon />}>X</Button>
                 </TableCell>
