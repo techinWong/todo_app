@@ -11,7 +11,8 @@ class ControlElement extends React.Component{
 
         this.state = {
             items: [],
-            newItem: {}
+            newItem: {},
+            selectItems:[]
         }
 
         this.clear = this.clear.bind(this);
@@ -19,11 +20,19 @@ class ControlElement extends React.Component{
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.completeItems = this.completeItems.bind(this);
+        this.selectItems = this.selectItems.bind(this);
+        this.changeItems = this.changeItems.bind(this);
 
     }
 
     clear(){
         this.setState({ items: []});
+    }
+
+    selectItems(index){
+        let item = this.state.items;
+        item[index].select = !item[index].select
+        this.setState({items:item })
     }
 
     completeItems(index) {
@@ -32,13 +41,36 @@ class ControlElement extends React.Component{
         this.setState({ items: item })
     }
 
+    changeItems(){
+        const items = this.state.items;
+        const filterArray = this.state.items.filter(item => item.select === true);
+        if(filterArray.length === 2){
+                var k=1
+                    items.forEach((item,i) => {
+                        if(item.select === true){
+                            items[i] = filterArray[k]
+                            k--
+                            item.select = false
+                        }
+                    })
+                this.setState({items:items})
+        }
+        else{
+            alert('Please Select Only 2 Options')
+            items.forEach(item => {
+                item.select = false
+            })
+            this.setState({items:items})
+        }
+    }
+
     deleteItems(number,event){
         const filterArray = this.state.items.filter(item => this.state.items.indexOf(item) !== number);
         this.setState({ items:filterArray });
     }
 
     handleChange(event){
-        this.setState({newItem:{title:event.target.value , click:false}});
+        this.setState({newItem:{title:event.target.value , click:false , select:false}});
     }
 
     handleSubmit(event){
@@ -67,8 +99,10 @@ class ControlElement extends React.Component{
                     items={this.state.items}
                     deleteItems={this.deleteItems}
                     completeItems={this.completeItems}
+                    selectItems={this.selectItems}
                 />
                 <Button className="clear" onClick={this.clear} variant="outlined">Clear the List</Button>
+                <Button className="change" variant="contained" onClick={this.changeItems}>Change</Button>
             </div>
         );
     }

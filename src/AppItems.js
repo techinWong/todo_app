@@ -23,9 +23,10 @@ class AppItems extends React.Component {
         var tableHeader =
             <TableHead className="tableHead">
                 <TableRow>
-                    <TableCell></TableCell>
-                    <TableCell className="taskitem">Task</TableCell>
-                    <TableCell>(X)</TableCell>
+                    <TableCell align="center"></TableCell>
+                    <TableCell align="center" className="taskitem">Task</TableCell>
+                    <TableCell align="center">(X)</TableCell>
+                    <TableCell align="center">SELECT</TableCell>
                 </TableRow>
             </TableHead>;
 
@@ -40,6 +41,7 @@ class AppItems extends React.Component {
                 <TableCell>
                     <Button className="remove" onClick={this.props.deleteItems.bind(this, index)} variant="outlined" color="error" startIcon={<DeleteIcon />}>X</Button>
                 </TableCell>
+                <TableCell align="center"><Checkbox onClick={this.props.selectItems.bind(this,index)} checked={item.select}/></TableCell>
             </TableRow>
         });
 
