@@ -19,6 +19,7 @@ class AppItems extends React.Component {
     }
   
     render() {
+        localStorage.setItem('data',JSON.stringify(this.props.items))
         var items = this.props.items;
         var tableHeader =
             <TableHead className="tableHead">

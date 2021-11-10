@@ -9,10 +9,19 @@ class ControlElement extends React.Component{
     constructor(props){
         super(props);
 
+        let items=[];
+        const data = localStorage.getItem("data")
+        if(data){
+            try {
+                items=JSON.parse(data)
+            } catch (error) {
+                
+            }
+        }
+
         this.state = {
-            items: [],
-            newItem: {},
-            selectItems:[]
+            items: items,
+            newItem: {}
         }
 
         this.clear = this.clear.bind(this);
