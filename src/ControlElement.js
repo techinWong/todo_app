@@ -75,13 +75,13 @@ class ControlElement extends React.Component{
 
     handleSubmit(event){
         event.preventDefault();
-         if(this.state.newItem.title === undefined){
+         if(this.state.newItem.title === (undefined) || this.state.newItem.title === ('')){
             alert('Please Enter The Task')
          }
          else{
              
             this.state.items.unshift(this.state.newItem);
-            this.setState({newItem:{title:''}});
+            this.setState({newItem:{title:''}})
          }
     }
 
