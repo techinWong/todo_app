@@ -37,6 +37,7 @@ class ControlElement extends React.Component{
         this.setEdit = this.setEdit.bind(this);
         this.handleEditItem = this.handleEditItem.bind(this);
         this.updateItem = this.updateItem.bind(this);
+        this.cancelEdit = this.cancelEdit.bind(this);
     }
 
     handleEditItem(e){
@@ -53,8 +54,12 @@ class ControlElement extends React.Component{
         this.setState({ items: []});
     }
 
+    cancelEdit(){
+        this.setState({edit:false})
+    }
+
     setEdit(index){
-        this.setState({edit:true , editIndex:index})
+        this.setState({edit:true , editIndex:index ,editItem:this.state.items[index].title})
     }
 
     selectItems(index){
@@ -137,6 +142,7 @@ class ControlElement extends React.Component{
                     editIndex={this.state.editIndex}
                     handleEditItem={this.handleEditItem}
                     updateItem={this.updateItem}
+                    cancelEdit={this.cancelEdit}
                 />
                 <Button className="clear" onClick={this.clear} variant="outlined">Clear the List</Button>
                 <Button className="change" variant="contained" onClick={this.changeItems}>Change</Button>

@@ -53,7 +53,7 @@ class AppItems extends React.Component {
                             <label htmlFor="fname">Edit Item:</label><br />
                             <input type="text" id="fname" name="fname" onChange={this.props.handleEditItem.bind(this)}defaultValue={this.props.items[editIndex].title} /><br />
                             <Button onClick={this.props.updateItem.bind(this,editIndex)}>UPDATE</Button>
-                            <Button>CANCEL</Button>
+                            <Button onClick={this.props.cancelEdit.bind(this)}>CANCEL</Button>
                     </div>
 
             )
