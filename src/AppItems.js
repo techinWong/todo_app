@@ -42,16 +42,30 @@ class AppItems extends React.Component {
                 <TableCell>
                     <Button className="remove" onClick={this.props.deleteItems.bind(this, index)} variant="outlined" color="error" startIcon={<DeleteIcon />}>X</Button>
                 </TableCell>
-                <TableCell align="center"><Checkbox onClick={this.props.selectItems.bind(this,index)} checked={item.select}/></TableCell>
+                <TableCell align="center"><Button onClick={this.props.setEdit.bind(this,index)}>EDIT</Button><Checkbox onClick={this.props.selectItems.bind(this,index)} checked={item.select}/></TableCell>
             </TableRow>
         });
 
-        return (
-            <TableContainer className="taskTable" >
-                {tableHeader}
-                {list}
-            </TableContainer>
-        )
+        if(this.props.edit){
+            const editIndex = this.props.editIndex
+            return (
+                    <div>
+                            <label htmlFor="fname">Edit Item:</label><br />
+                            <input type="text" id="fname" name="fname" onChange={this.props.handleEditItem.bind(this)}defaultValue={this.props.items[editIndex].title} /><br />
+                            <Button onClick={this.props.updateItem.bind(this,editIndex)}>UPDATE</Button>
+                            <Button>CANCEL</Button>
+                    </div>
+
+            )
+        }
+        else{
+            return (
+                <TableContainer style={{width:"100"}}className="taskTable" >
+                    {tableHeader}
+                    {list}
+                </TableContainer>
+            )
+        }
     }
 }
 export default AppItems;

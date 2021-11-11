@@ -21,7 +21,10 @@ class ControlElement extends React.Component{
 
         this.state = {
             items: items,
-            newItem: {}
+            newItem: {},
+            edit:false,
+            editIndex:'',
+            editItem:''
         }
 
         this.clear = this.clear.bind(this);
@@ -31,11 +34,27 @@ class ControlElement extends React.Component{
         this.completeItems = this.completeItems.bind(this);
         this.selectItems = this.selectItems.bind(this);
         this.changeItems = this.changeItems.bind(this);
+        this.setEdit = this.setEdit.bind(this);
+        this.handleEditItem = this.handleEditItem.bind(this);
+        this.updateItem = this.updateItem.bind(this);
+    }
 
+    handleEditItem(e){
+        this.setState({editItem:e.target.value})
+    }
+
+    updateItem(index){
+        const item=this.state.items
+        item[index].title = this.state.editItem
+        this.setState({items:item , edit:false}) 
     }
 
     clear(){
         this.setState({ items: []});
+    }
+
+    setEdit(index){
+        this.setState({edit:true , editIndex:index})
     }
 
     selectItems(index){
@@ -113,6 +132,11 @@ class ControlElement extends React.Component{
                     deleteItems={this.deleteItems}
                     completeItems={this.completeItems}
                     selectItems={this.selectItems}
+                    setEdit={this.setEdit}
+                    edit={this.state.edit}
+                    editIndex={this.state.editIndex}
+                    handleEditItem={this.handleEditItem}
+                    updateItem={this.updateItem}
                 />
                 <Button className="clear" onClick={this.clear} variant="outlined">Clear the List</Button>
                 <Button className="change" variant="contained" onClick={this.changeItems}>Change</Button>
