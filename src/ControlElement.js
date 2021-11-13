@@ -2,6 +2,11 @@ import React from 'react';
 import AppItems from './AppItems';
 import Button from '@mui/material/Button';
 import './App.css';
+import TextField from '@mui/material/TextField';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import DatePicker from '@mui/lab/DatePicker';
+
 
 
 class ControlElement extends React.Component{
@@ -24,7 +29,8 @@ class ControlElement extends React.Component{
             newItem: {},
             edit:false,
             editIndex:'',
-            editItem:''
+            editItem:'',
+            dateValue:null
         }
 
         this.clear = this.clear.bind(this);
@@ -38,6 +44,20 @@ class ControlElement extends React.Component{
         this.handleEditItem = this.handleEditItem.bind(this);
         this.updateItem = this.updateItem.bind(this);
         this.cancelEdit = this.cancelEdit.bind(this);
+        this.handleDateChange = this.handleDateChange.bind(this);
+        this.editDate = this.editDate.bind(this);
+    }
+
+    editDate = (index,date) => {
+        const item = this.state.items
+        item[index].date = date
+        this.setState({items:item})
+    }
+
+    handleDateChange = (date) => {
+        this.setState({
+            dateValue:date
+        })
     }
 
     handleEditItem(e){
@@ -103,16 +123,18 @@ class ControlElement extends React.Component{
     }
 
     handleChange(event){
-        this.setState({newItem:{title:event.target.value , click:false , select:false}});
+        this.setState({newItem:{title:event.target.value , click:false , select:false, date:null}});
     }
 
     handleSubmit(event){
         event.preventDefault();
-         if(this.state.newItem.title === (undefined) || this.state.newItem.title === ('')){
-            alert('Please Enter The Task')
+         if((this.state.newItem.title === (undefined) || this.state.newItem.title === ('')) || (this.state.dateValue === null)){
+            alert('Please Complete The Task And Date')
          }
          else{
-             
+            const newItem = this.state.newItem
+            newItem.date = this.state.dateValue
+            this.setState({newItem:newItem , dateValue:null })
             this.state.items.unshift(this.state.newItem);
             this.setState({newItem:{title:''}})
          }
@@ -129,6 +151,16 @@ class ControlElement extends React.Component{
                         onChange={this.handleChange}
                         value={this.state.newItem.title}
                     />
+
+                        <LocalizationProvider dateAdapter={AdapterDateFns}>
+                            <DatePicker
+                                label="SELECT DATE"
+                                value={this.state.dateValue}
+                                onChange={this.handleDateChange}
+                                renderInput={(params) => <TextField {...params} />}
+                            />
+                        </LocalizationProvider>
+
                     <br/>
                     <Button className="enter" type="submit" variant="contained">Add</Button>
                 </form>
@@ -143,6 +175,8 @@ class ControlElement extends React.Component{
                     handleEditItem={this.handleEditItem}
                     updateItem={this.updateItem}
                     cancelEdit={this.cancelEdit}
+                    handleDateChange={this.handleDateChange}
+                    editDate={this.editDate}
                 />
                 <Button className="clear" onClick={this.clear} variant="outlined">Clear the List</Button>
                 <Button className="change" variant="contained" onClick={this.changeItems}>Change</Button>

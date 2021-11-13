@@ -7,6 +7,10 @@ import TableRow from '@mui/material/TableRow';
 import TableHead from "@mui/material/TableHead";
 import TableContainer from "@mui/material/TableContainer";
 import TableCell from '@mui/material/TableCell';
+import DatePicker from '@mui/lab/DatePicker';
+import TextField from '@mui/material/TextField';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
 
 
 class AppItems extends React.Component {
@@ -28,6 +32,7 @@ class AppItems extends React.Component {
                     <TableCell align="center" className="taskitem">Task</TableCell>
                     <TableCell align="center">(X)</TableCell>
                     <TableCell align="center">SELECT</TableCell>
+                    <TableCell align="center">DATE</TableCell>
                 </TableRow>
             </TableHead>;
 
@@ -43,6 +48,18 @@ class AppItems extends React.Component {
                     <Button className="remove" onClick={this.props.deleteItems.bind(this, index)} variant="outlined" color="error" startIcon={<DeleteIcon />}>X</Button>
                 </TableCell>
                 <TableCell align="center"><Button onClick={this.props.setEdit.bind(this,index)}>EDIT</Button><Checkbox onClick={this.props.selectItems.bind(this,index)} checked={item.select}/></TableCell>
+                <TableCell align="center">
+
+                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                            <DatePicker
+                                label="SELECT DATE"
+                                value={item.date}
+                                onChange={this.props.editDate.bind(this,index)}
+                                renderInput={(params) => <TextField {...params} />}
+                            />
+                    </LocalizationProvider>
+
+                </TableCell>
             </TableRow>
         });
 
