@@ -1,25 +1,40 @@
 body{
-  background:#404146 ;
+  background:#3e4f3c ;
   text-align: center;
   height: 100vh;
   padding:0;
   margin:0;
   display: flex;
   justify-content: center;
+  color:#ff6f3d
+}
+
+.list{
+  width: 100%;
+  text-align: center;
+ 
+  
 }
 
 .mainContainer {
   text-align: center;
+  width: 100%;
+  /* background-color: black; */
+  
 }
 
 .todoForm{
   display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 10px;
 }
 
 table{
   border-collapse: collapse;
-  border-spacing: 100px;
+  border-spacing: 0px 4px;
   width: 100%;
+
 }
 .taskTable{
   margin-top:15px;
@@ -29,12 +44,38 @@ table{
 }
 
 .taskItem{
-  text-align:left;
-  padding-left:25px;
+  text-align:center;
+  padding-left:3vw;
+
 }
 
-.linethrough{
+
+
+.taskItem.linethrough{
   text-decoration: line-through;
+  color:grey
+}
+
+.editItem{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+input{
+  
+  border:none;
+}
+
+.editBoxAnddateBox{
+  display: flex;
+}
+
+.CheckboxForm{
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
 }
 
 
