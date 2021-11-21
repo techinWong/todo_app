@@ -108,10 +108,12 @@ class ControlElement extends React.Component{
         this.setState({edit:true , editId:id ,editItem:item.title, editDateValue:item.date})
     }
 
-    selectItems(index){
+    selectItems(id){
         let item = this.state.items;
+        const filterArray = item.filter(item => item.id === id)
+        const index = item.findIndex(item => item === filterArray[0])
         item[index].select = !item[index].select
-        this.setState({items:item })
+        this.setState({ items: item })
     }
 
     completeItems(index) {
