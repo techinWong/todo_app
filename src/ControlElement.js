@@ -54,9 +54,14 @@ class ControlElement extends React.Component{
         this.sortChange = this.sortChange.bind(this);
         this.filterCheck = this.filterCheck.bind(this);
         this.byDateFromLarge = this.byDateFromLarge.bind(this);
+        this.byDateFromLess = this.byDateFromLess.bind(this);
+
 
     }
 
+    byDateFromLess(a, b) {
+        return new Date(a.date).valueOf() - new Date(b.date).valueOf();
+    }
     byDateFromLarge(a, b) {
         return new Date(b.date).valueOf() - new Date(a.date).valueOf();
     }
