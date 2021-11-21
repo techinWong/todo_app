@@ -104,8 +104,8 @@ class ControlElement extends React.Component{
         this.setState({edit:false})
     }
 
-    setEdit(index){
-        this.setState({edit:true , editIndex:index ,editItem:this.state.items[index].title})
+    setEdit(id,item){
+        this.setState({edit:true , editId:id ,editItem:item.title, editDateValue:item.date})
     }
 
     selectItems(index){
