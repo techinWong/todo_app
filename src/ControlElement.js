@@ -153,7 +153,7 @@ class ControlElement extends React.Component{
     }
 
     handleChange(event){
-        this.setState({newItem:{title:event.target.value , click:false , select:false, date:null}});
+        this.setState({newItem:{title:event.target.value , click:false , select:false, date:null, dateValueString: '', id: Math.random()*1000}});
     }
 
     handleSubmit(event){
