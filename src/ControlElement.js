@@ -77,7 +77,8 @@ class ControlElement extends React.Component{
 
     handleDateChange = (date) => {
         this.setState({
-            dateValue:date
+            dateValue:date,
+            dateValueString: moment(date).format('DD-MM-YYYY')
         })
     }
 
