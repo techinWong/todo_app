@@ -52,8 +52,12 @@ class ControlElement extends React.Component{
         this.handleDateChange = this.handleDateChange.bind(this);
         this.editDate = this.editDate.bind(this);
         this.sortChange = this.sortChange.bind(this);
+        this.filterCheck = this.filterCheck.bind(this);
     }
 
+    filterCheck = (e) => {
+        this.setState({ filterCheck: e.target.checked })
+    }
     sortChange(e) {
         this.setState({ sortValue: e.target.value})
     }
