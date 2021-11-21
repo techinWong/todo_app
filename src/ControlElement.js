@@ -116,8 +116,10 @@ class ControlElement extends React.Component{
         this.setState({ items: item })
     }
 
-    completeItems(index) {
+    completeItems(id) {
         let item = this.state.items;
+        const filterArray = item.filter(item=>item.id===id)
+        const index = item.findIndex(item => item === filterArray[0])
         item[index].click = !item[index].click
         this.setState({ items: item })
     }
