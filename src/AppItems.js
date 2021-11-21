@@ -12,27 +12,49 @@ import TextField from '@mui/material/TextField';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 
-
 class AppItems extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            items: this.props.items,
+            items: []
         }
     }
-  
+
+   
+   
     render() {
+       
+
         localStorage.setItem('data',JSON.stringify(this.props.items))
-        var items = this.props.items;
+
+        let items=this.state.items
+        const items1=[...this.props.items]
+        
+        if(this.props.sortValue === '0' || this.props.sortValue === ''){
+            items = items1
+            items = (this.props.filterCheck) ? items1.filter(item => item.date !== null) : items1
+        }
+        else if(this.props.sortValue === '10'){
+            items = items1.sort(this.props.byDateFromLess)
+            items = (this.props.filterCheck) ? items1.filter(item => item.date !== null) : items1
+        }
+        else if(this.props.sortValue === '20'){
+            items = items1.sort(this.props.byDateFromLarge)
+            items = (this.props.filterCheck) ? items1.filter(item => item.date !== null) : items1
+        }
+
+        
+        
         var tableHeader =
-            <TableHead className="tableHead">
+            <TableHead className="tableHead" >
                 <TableRow>
-                    <TableCell align="center"></TableCell>
-                    <TableCell align="center" className="taskitem">Task</TableCell>
-                    <TableCell align="center">(X)</TableCell>
-                    <TableCell align="center">SELECT</TableCell>
+                    <TableCell align="center">Done</TableCell>
+                    <TableCell align="center"className="taskitem">Task</TableCell>
+                    <TableCell align="center">Edit</TableCell>
+                    <TableCell align="center">Select</TableCell>
                     <TableCell align="center">DATE</TableCell>
+                    <TableCell align="center">X</TableCell>
                 </TableRow>
             </TableHead>;
 
@@ -40,44 +62,53 @@ class AppItems extends React.Component {
             tableHeader = '';
         }
 
-        var list = items.map((item, index) => {
-            return <TableRow>
-                <TableCell> <Checkbox onClick={this.props.completeItems.bind(this,index)} checked={item.click}/></TableCell>
-                <TableCell className={`taskItem ${item.click ? "linethrough" : ""}`} key={index.toString()}>{item.title}</TableCell>
-                <TableCell>
-                    <Button className="remove" onClick={this.props.deleteItems.bind(this, index)} variant="outlined" color="error" startIcon={<DeleteIcon />}>X</Button>
-                </TableCell>
-                <TableCell align="center"><Button onClick={this.props.setEdit.bind(this,index)}>EDIT</Button><Checkbox onClick={this.props.selectItems.bind(this,index)} checked={item.select}/></TableCell>
+        var list = items.map((item) => {
+            return <TableRow align="center" styles={{ "width": "100%" }}>
+                <TableCell align="center"><Checkbox onClick={this.props.completeItems.bind(this,item.id)} checked={item.click}  /></TableCell>
+                <TableCell  align="left" className={`taskItem ${item.click ? "linethrough" : ""}`} key={item.id}>{item.title}</TableCell>
+                
+                <TableCell align="center"><Button onClick={this.props.setEdit.bind(this,item.id,item)}>EDIT</Button></TableCell>
+                <TableCell aling="center"><Checkbox onClick={this.props.selectItems.bind(this,item.id)} checked={item.select}/></TableCell>
                 <TableCell align="center">
 
-                    <LocalizationProvider dateAdapter={AdapterDateFns}>
-                            <DatePicker
-                                label="SELECT DATE"
-                                value={item.date}
-                                onChange={this.props.editDate.bind(this,index)}
-                                renderInput={(params) => <TextField {...params} />}
-                            />
-                    </LocalizationProvider>
+                {(item.dateValueString === "Invalid date") ? "" : item.dateValueString}
 
+                </TableCell>
+                <TableCell align="center">
+                    <Button className="remove" onClick={this.props.deleteItems.bind(this, item.id)} variant="outlined" color="error" startIcon={<DeleteIcon />}>X</Button>
                 </TableCell>
             </TableRow>
         });
-
         if(this.props.edit){
-            const editIndex = this.props.editIndex
+            const editId = this.props.editId
+            const editItem = this.props.editItem
+            const editDate = this.props.editDateValue
             return (
-                    <div>
+                    <div className="editItem">
                             <label htmlFor="fname">Edit Item:</label><br />
-                            <input type="text" id="fname" name="fname" onChange={this.props.handleEditItem.bind(this)}defaultValue={this.props.items[editIndex].title} /><br />
-                            <Button onClick={this.props.updateItem.bind(this,editIndex)}>UPDATE</Button>
-                            <Button onClick={this.props.cancelEdit.bind(this)}>CANCEL</Button>
+                        <div className="editBoxAnddateBox">
+                            <input type="text" id="fname" name="fname" onChange={this.props.handleEditItem.bind(this)}defaultValue={editItem} /><br />
+                            <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                <DatePicker
+                                 label="SELECT DATE"
+                                 value={editDate}
+                                 onChange={this.props.editDate.bind(this)}
+                                 renderInput={(params) => <TextField {...params} />}
+                             />
+                            </LocalizationProvider>
+                        </div>
+                        <br/>
+                         <div>
+                            <Button variant="contained" onClick={this.props.updateItem.bind(this,editId)}>UPDATE</Button>
+                            <Button style={{marginLeft:"10px"}}variant="outlined" onClick={this.props.cancelEdit.bind(this)} color="error">CANCEL</Button>
+                        </div>   
                     </div>
 
             )
         }
         else{
             return (
-                <TableContainer style={{width:"100"}}className="taskTable" >
+                <TableContainer align="center" style={{width:"100"}}  className="taskTable" >
                     {tableHeader}
                     {list}
                 </TableContainer>
