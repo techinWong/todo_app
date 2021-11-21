@@ -30,7 +30,12 @@ class ControlElement extends React.Component{
             edit:false,
             editIndex:'',
             editItem:'',
-            dateValue:null
+            editId: '',
+            dateValue:null,
+            dateValueString: '',
+            menuValue: null,
+            sortValue: '',
+            filterCheck: false,
         }
 
         this.clear = this.clear.bind(this);
@@ -141,28 +146,55 @@ class ControlElement extends React.Component{
     }
 
     render(){
-        return(
+        return (
             <div className="list">
                 <form onSubmit={this.handleSubmit} className="todoForm">
                     <input
+                        style={{padding:"0px 50px 0px 50px"}}
                         className="newTask"
                         type="text"
-                        placeholder="Create new work item"
+                        placeholder="Add Your Task"
                         onChange={this.handleChange}
                         value={this.state.newItem.title}
                     />
-
-                        <LocalizationProvider dateAdapter={AdapterDateFns}>
-                            <DatePicker
-                                label="SELECT DATE"
-                                value={this.state.dateValue}
-                                onChange={this.handleDateChange}
-                                renderInput={(params) => <TextField {...params} />}
-                            />
-                        </LocalizationProvider>
-
-                    <br/>
+                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                        <DatePicker
+                            label="SELECT DATE"
+                            value={this.state.dateValue}
+                            onChange={this.handleDateChange}
+                            renderInput={(params) => <TextField {...params} />}
+                        />
+                    </LocalizationProvider>
                     <Button className="enter" type="submit" variant="contained">Add</Button>
+                    <br />
+                    <div className="CheckboxForm">
+                    <label style={{fontSize : "10px" , textAlign:"right" , color:"black"}}>filter by date</label>
+                    <Checkbox
+                        checked={this.state.filterCheck}
+                        onClick={this.filterCheck}
+                        inputProps={{ 'aria-label': 'controlled' }}
+                    />
+                    </div>
+                    <Box sx={{ minWidth: 120 , marginLeft: "10px" }}>
+                        <FormControl fullWidth>
+                            <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                                Sorted
+                            </InputLabel>
+                            <NativeSelect
+                                onChange={this.sortChange}
+                                defaultValue={0}
+                                inputProps={{
+                                    name: 'typeOfSorted',
+                                    id: 'uncontrolled-native',
+                                }}
+                            >
+                                <option value={0}>NONE</option>
+                                <option value={10}>เร็วไปช้า</option>
+                                <option value={20}>ช้าไปเร็ว</option>
+                            </NativeSelect>
+                        </FormControl>
+                    </Box>
+                    
                 </form>
                 <AppItems
                     items={this.state.items}
@@ -171,15 +203,23 @@ class ControlElement extends React.Component{
                     selectItems={this.selectItems}
                     setEdit={this.setEdit}
                     edit={this.state.edit}
+                    editId={this.state.editId}
+                    editItem={this.state.editItem}
                     editIndex={this.state.editIndex}
+                    editDateValue={this.state.editDateValue}
                     handleEditItem={this.handleEditItem}
                     updateItem={this.updateItem}
                     cancelEdit={this.cancelEdit}
                     handleDateChange={this.handleDateChange}
                     editDate={this.editDate}
+                    sortValue={this.state.sortValue}
+                    filterCheck={this.state.filterCheck}
+                    byDateFromLarge={this.byDateFromLarge}
+                    byDateFromLess={this.byDateFromLess}
                 />
-                <Button className="clear" onClick={this.clear} variant="outlined">Clear the List</Button>
-                <Button className="change" variant="contained" onClick={this.changeItems}>Change</Button>
+                <br/>
+                <Button style={{color:"white" , border:"1px solid white"}} className="clear" onClick={this.clear} variant="outlined" >Clear the List</Button>
+                <Button style={{marginLeft : "10px"}}className="change" variant="contained" onClick={this.changeItems} disabled={this.state.sortValue === '10' || this.state.sortValue === '20' ? true : false}>SWAP</Button>
             </div>
         );
     }
