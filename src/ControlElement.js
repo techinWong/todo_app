@@ -71,10 +71,8 @@ class ControlElement extends React.Component{
     sortChange(e) {
         this.setState({ sortValue: e.target.value})
     }
-    editDate = (index,date) => {
-        const item = this.state.items
-        item[index].date = date
-        this.setState({items:item})
+    editDate = (date) => {
+        this.setState({editDateValue: date})
     }
 
     handleDateChange = (date) => {
