@@ -147,9 +147,9 @@ class ControlElement extends React.Component{
         }
     }
 
-    deleteItems(number,event){
-        const filterArray = this.state.items.filter(item => this.state.items.indexOf(item) !== number);
-        this.setState({ items:filterArray });
+    deleteItems(id){
+        this.setState({  items: this.state.items.filter(item => item.id !== id) })
+
     }
 
     handleChange(event){
