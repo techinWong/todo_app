@@ -86,10 +86,14 @@ class ControlElement extends React.Component{
         this.setState({editItem:e.target.value})
     }
 
-    updateItem(index){
-        const item=this.state.items
+    updateItem = (id) => {
+        const item = this.state.items
+        const index = item.findIndex(item => item.id === id)
         item[index].title = this.state.editItem
-        this.setState({items:item , edit:false}) 
+        item[index].date = this.state.editDateValue
+        const dateValue = moment(this.state.editDateValue).format('DD-MM-YYYY')
+        item[index].dateValueString = dateValue
+        this.setState({ items: item, edit: false})
     }
 
     clear(){
