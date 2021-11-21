@@ -97,7 +97,7 @@ class ControlElement extends React.Component{
     }
 
     clear(){
-        this.setState({ items: []});
+        this.setState({ items: [], filterCheck: false});
     }
 
     cancelEdit(){
