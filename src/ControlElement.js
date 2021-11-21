@@ -53,8 +53,13 @@ class ControlElement extends React.Component{
         this.editDate = this.editDate.bind(this);
         this.sortChange = this.sortChange.bind(this);
         this.filterCheck = this.filterCheck.bind(this);
+        this.byDateFromLarge = this.byDateFromLarge.bind(this);
+
     }
 
+    byDateFromLarge(a, b) {
+        return new Date(b.date).valueOf() - new Date(a.date).valueOf();
+    }
     filterCheck = (e) => {
         this.setState({ filterCheck: e.target.checked })
     }
