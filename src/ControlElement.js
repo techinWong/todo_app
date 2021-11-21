@@ -125,21 +125,21 @@ class ControlElement extends React.Component{
     }
 
     changeItems(){
-        const items = this.state.items;
-        const filterArray = this.state.items.filter(item => item.select === true);
+        var items = this.state.items;
+        const filterArray = items.filter(item => item.select)
+        console.log(filterArray)
         if(filterArray.length === 2){
-                var k=1
-                    items.forEach((item,i) => {
-                        if(item.select === true){
-                            items[i] = filterArray[k]
-                            k--
-                            item.select = false
-                        }
-                    })
-                this.setState({items:items})
-        }
-        else{
-            alert('Please Select Only 2 Options')
+            let index0 = items.findIndex(item => item.id === filterArray[0].id)
+            let index1 = items.findIndex(item => item.id === filterArray[1].id)
+            
+            items[index0] = filterArray[1]
+            items[index1] = filterArray[0]
+            items[index0].select = false
+            items[index1].select = false
+            
+            this.setState({items:items })
+        }else{
+            alert('Please Select 2 Tasks')
             items.forEach(item => {
                 item.select = false
             })
