@@ -158,16 +158,18 @@ class ControlElement extends React.Component{
 
     handleSubmit(event){
         event.preventDefault();
-         if((this.state.newItem.title === (undefined) || this.state.newItem.title === ('')) || (this.state.dateValue === null)){
-            alert('Please Complete The Task And Date')
-         }
-         else{
+        if ((this.state.newItem.title === undefined || this.state.newItem.title === '')) {
+            alert('Please Complete The Task')
+        }
+        else {
             const newItem = this.state.newItem
+            const item = this.state.items
             newItem.date = this.state.dateValue
-            this.setState({newItem:newItem , dateValue:null })
-            this.state.items.unshift(this.state.newItem);
-            this.setState({newItem:{title:''}})
-         }
+            newItem.dateValueString = this.state.dateValueString
+            this.setState({  newItem: newItem,dateValue: null, dateValueString: '' })
+            item.unshift(newItem)
+            this.setState({ newItem: { title: '' } , items:item} )
+        }
     }
 
     render(){
