@@ -31,6 +31,7 @@ class AppItems extends React.Component {
         let items=this.state.items
         const items1=[...this.props.items]
         
+        //Check the value of option and filterCheck
         if(this.props.sortValue === '0' || this.props.sortValue === ''){
             items = items1
             items = (this.props.filterCheck) ? items1.filter(item => item.date !== null) : items1

@@ -114,7 +114,7 @@ class ControlElement extends React.Component{
         this.setState({edit:true , editId:id ,editItem:item.title, editDateValue:item.date})
     }
 
-    selectItems(id){
+    selectItems(id){ //set select of item that have been clicked    from false --> true
         let item = this.state.items;
         const filterArray = item.filter(item => item.id === id)
         const index = item.findIndex(item => item === filterArray[0])
@@ -122,7 +122,7 @@ class ControlElement extends React.Component{
         this.setState({ items: item })
     }
 
-    completeItems(id) {
+    completeItems(id) {  //set click of item that have been done     from false --> true
         let item = this.state.items;
         const filterArray = item.filter(item=>item.id===id)
         const index = item.findIndex(item => item === filterArray[0])
@@ -130,15 +130,15 @@ class ControlElement extends React.Component{
         this.setState({ items: item })
     }
 
-    changeItems(){
+    changeItems(){ //ChangeItems by filterArray
         var items = this.state.items;
-        const filterArray = items.filter(item => item.select)
+        const filterArray = items.filter(item => item.select) //filter item that select is true
         console.log(filterArray)
         if(filterArray.length === 2){
-            let index0 = items.findIndex(item => item.id === filterArray[0].id)
+            let index0 = items.findIndex(item => item.id === filterArray[0].id) 
             let index1 = items.findIndex(item => item.id === filterArray[1].id)
             
-            items[index0] = filterArray[1]
+            items[index0] = filterArray[1] 
             items[index1] = filterArray[0]
             items[index0].select = false
             items[index1].select = false
@@ -167,7 +167,7 @@ class ControlElement extends React.Component{
         if ((this.state.newItem.title === undefined || this.state.newItem.title === '')) {
             alert('Please Complete The Task')
         }
-        else {
+        else { //Unshift newItem to item
             const newItem = this.state.newItem
             const item = this.state.items
             newItem.date = this.state.dateValue
