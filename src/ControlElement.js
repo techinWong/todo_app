@@ -132,7 +132,7 @@ class ControlElement extends React.Component{
 
     changeItems(){ //ChangeItems by filterArray
         var items = this.state.items;
-        const filterArray = items.filter(item => item.select) //filter item that select is true
+        const filterArray = items.filter(item => item.select) //filter item that item.select is true
         console.log(filterArray)
         if(filterArray.length === 2){
             let index0 = items.findIndex(item => item.id === filterArray[0].id) 
