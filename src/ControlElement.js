@@ -182,13 +182,13 @@ class ControlElement extends React.Component{
         return (
             <Box className="list">
                 <form onSubmit={this.handleSubmit} className="todoForm">
-                    <input
-                        style={{padding:"0px 50px 0px 50px"}}
+                    <TextField
                         className="newTask"
                         type="text"
-                        placeholder="Add Your Task"
                         onChange={this.handleChange}
                         value={this.state.newItem.title}
+                        label="Enter Your Task"
+                        id="margin-none"
                     />
                     <LocalizationProvider dateAdapter={AdapterDateFns}>
                         <DatePicker
