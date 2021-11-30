@@ -48,7 +48,7 @@ class AppItems extends React.Component {
 
         
         
-        var tableHeader =
+        let tableHeader =
             <TableHead className="tableHead" >
                 <TableRow>
                     <TableCell align="center">Done</TableCell>
@@ -64,7 +64,7 @@ class AppItems extends React.Component {
             tableHeader = '';
         }
 
-        var list = items.map((item) => {
+        let list = items.map((item) => {
             return <TableRow align="center" styles={{ "width": "100%" }}>
                 <TableCell align="center"><Checkbox onClick={this.props.completeItems.bind(this,item.id)} checked={item.click}  /></TableCell>
                 <TableCell  align="left" className={`taskItem ${item.click ? "linethrough" : ""}`} key={item.id}>{item.title}</TableCell>
