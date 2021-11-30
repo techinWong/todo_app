@@ -3,8 +3,8 @@ import './App.css';
 import ControlElement from './ControlElement';
 import Box from '@mui/material/Box';
 
-class App extends React.Component {
-  render(){
+function App (){
+  
     return (
       <Box className="mainContainer">
         <Box className="titles">
@@ -13,7 +13,7 @@ class App extends React.Component {
         <ControlElement />
       </Box>
     );
-    }
+    
 }
 
 export default App;
