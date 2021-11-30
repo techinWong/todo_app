@@ -11,6 +11,7 @@ import DatePicker from '@mui/lab/DatePicker';
 import TextField from '@mui/material/TextField';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import Box from '@mui/material/Box';
 
 class AppItems extends React.Component {
     constructor(props) {
@@ -85,9 +86,9 @@ class AppItems extends React.Component {
             const editItem = this.props.editItem
             const editDate = this.props.editDateValue
             return (
-                    <div className="editItem">
+                    <Box className="editItem">
                             <label htmlFor="fname">Edit Item:</label><br />
-                        <div className="editBoxAnddateBox">
+                        <Box className="editBoxAnddateBox">
                             <input type="text" id="fname" name="fname" onChange={this.props.handleEditItem.bind(this)}defaultValue={editItem} /><br />
                             <LocalizationProvider dateAdapter={AdapterDateFns}>
                                 <DatePicker
@@ -97,13 +98,13 @@ class AppItems extends React.Component {
                                  renderInput={(params) => <TextField {...params} />}
                              />
                             </LocalizationProvider>
-                        </div>
+                        </Box>
                         <br/>
-                         <div>
+                         <Box>
                             <Button variant="contained" onClick={this.props.updateItem.bind(this,editId)}>UPDATE</Button>
                             <Button style={{marginLeft:"10px"}}variant="outlined" onClick={this.props.cancelEdit.bind(this)} color="error">CANCEL</Button>
-                        </div>   
-                    </div>
+                        </Box>   
+                    </Box>
 
             )
         }

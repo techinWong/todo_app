@@ -180,7 +180,7 @@ class ControlElement extends React.Component{
 
     render(){
         return (
-            <div className="list">
+            <Box className="list">
                 <form onSubmit={this.handleSubmit} className="todoForm">
                     <input
                         style={{padding:"0px 50px 0px 50px"}}
@@ -253,7 +253,7 @@ class ControlElement extends React.Component{
                 <br/>
                 <Button style={{color:"white" , border:"1px solid white"}} className="clear" onClick={this.clear} variant="outlined" >Clear the List</Button>
                 <Button style={{marginLeft : "10px"}}className="change" variant="contained" onClick={this.changeItems} disabled={this.state.sortValue === '10' || this.state.sortValue === '20' ? true : false}>SWAP</Button>
-            </div>
+            </Box>
         );
     }
 }
