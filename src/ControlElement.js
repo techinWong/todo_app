@@ -179,6 +179,10 @@ class ControlElement extends React.Component{
     }
 
     render(){
+
+        const {items , newItem , selectItems , edit , editIndex , editItem , editId , editDateValue , dateValue , 
+            dateValueString , menuValue , sortValue , filterCheck} = this.state;
+
         return (
             <Box className="list">
                 <form onSubmit={this.handleSubmit} className="todoForm">
@@ -186,14 +190,14 @@ class ControlElement extends React.Component{
                         className="newTask"
                         type="text"
                         onChange={this.handleChange}
-                        value={this.state.newItem.title}
+                        value={newItem.title}
                         label="Enter Your Task"
                         id="margin-none"
                     />
                     <LocalizationProvider dateAdapter={AdapterDateFns}>
                         <DatePicker
                             label="SELECT DATE"
-                            value={this.state.dateValue}
+                            value={dateValue}
                             onChange={this.handleDateChange}
                             renderInput={(params) => <TextField {...params} />}
                         />
@@ -203,7 +207,7 @@ class ControlElement extends React.Component{
                     <div className="CheckboxForm">
                     <label style={{fontSize : "10px" , textAlign:"right" , color:"black"}}>filter by date</label>
                     <Checkbox
-                        checked={this.state.filterCheck}
+                        checked={filterCheck}
                         onClick={this.filterCheck}
                         inputProps={{ 'aria-label': 'controlled' }}
                     />
@@ -230,23 +234,23 @@ class ControlElement extends React.Component{
                     
                 </form>
                 <AppItems
-                    items={this.state.items}
+                    items={items}
                     deleteItems={this.deleteItems}
                     completeItems={this.completeItems}
                     selectItems={this.selectItems}
                     setEdit={this.setEdit}
-                    edit={this.state.edit}
-                    editId={this.state.editId}
-                    editItem={this.state.editItem}
-                    editIndex={this.state.editIndex}
-                    editDateValue={this.state.editDateValue}
+                    edit={edit}
+                    editId={editId}
+                    editItem={editItem}
+                    editIndex={editIndex}
+                    editDateValue={editDateValue}
                     handleEditItem={this.handleEditItem}
                     updateItem={this.updateItem}
                     cancelEdit={this.cancelEdit}
                     handleDateChange={this.handleDateChange}
                     editDate={this.editDate}
-                    sortValue={this.state.sortValue}
-                    filterCheck={this.state.filterCheck}
+                    sortValue={sortValue}
+                    filterCheck={filterCheck}
                     byDateFromLarge={this.byDateFromLarge}
                     byDateFromLess={this.byDateFromLess}
                 />
