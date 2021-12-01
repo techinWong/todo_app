@@ -26,24 +26,24 @@ class AppItems extends React.Component {
    
     render() {
        
+        let { editId , editItem , editDateValue , items , edit , sortValue , filterCheck } = this.props
 
-        localStorage.setItem('data',JSON.stringify(this.props.items))
+        localStorage.setItem('data',JSON.stringify(items))
 
-        let items=this.state.items
-        const items1=[...this.props.items]
+        const items1=[...items]
         
         //Check the value of option and filterCheck
-        if(this.props.sortValue === '0' || this.props.sortValue === ''){
+        if(sortValue === '0' || sortValue === ''){
             items = items1
-            items = (this.props.filterCheck) ? items1.filter(item => item.date !== null) : items1
+            items = (filterCheck) ? items1.filter(item => item.date !== null) : items1
         }
-        else if(this.props.sortValue === '10'){
+        else if(sortValue === '10'){
             items = items1.sort(this.props.byDateFromLess)
-            items = (this.props.filterCheck) ? items1.filter(item => item.date !== null) : items1
+            items = (filterCheck) ? items1.filter(item => item.date !== null) : items1
         }
-        else if(this.props.sortValue === '20'){
+        else if(sortValue === '20'){
             items = items1.sort(this.props.byDateFromLarge)
-            items = (this.props.filterCheck) ? items1.filter(item => item.date !== null) : items1
+            items = (filterCheck) ? items1.filter(item => item.date !== null) : items1
         }
 
         
@@ -81,10 +81,9 @@ class AppItems extends React.Component {
                 </TableCell>
             </TableRow>
         });
-        if(this.props.edit){
-            const editId = this.props.editId
-            const editItem = this.props.editItem
-            const editDate = this.props.editDateValue
+        if(edit){
+           
+
             return (
                     <Box className="editItem">
                             <label htmlFor="fname">Edit Item:</label><br />
@@ -93,7 +92,7 @@ class AppItems extends React.Component {
                             <LocalizationProvider dateAdapter={AdapterDateFns}>
                                 <DatePicker
                                  label="SELECT DATE"
-                                 value={editDate}
+                                 value={editDateValue}
                                  onChange={this.props.onEditDate.bind(this)}
                                  renderInput={(params) => <TextField {...params} />}
                              />
