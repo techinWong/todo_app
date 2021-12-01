@@ -235,20 +235,20 @@ class ControlElement extends React.Component{
                 </form>
                 <AppItems
                     items={items}
-                    deleteItems={this.deleteItems}
-                    completeItems={this.completeItems}
-                    selectItems={this.selectItems}
-                    setEdit={this.setEdit}
+                    onDelete={this.deleteItems}
+                    onComplete={this.completeItems}
+                    onSelect={this.selectItems}
+                    onSetEdit={this.setEdit}
                     edit={edit}
                     editId={editId}
                     editItem={editItem}
                     editIndex={editIndex}
                     editDateValue={editDateValue}
-                    handleEditItem={this.handleEditItem}
-                    updateItem={this.updateItem}
-                    cancelEdit={this.cancelEdit}
-                    handleDateChange={this.handleDateChange}
-                    editDate={this.editDate}
+                    onHandleEditItem={this.handleEditItem}
+                    onUpdate={this.updateItem}
+                    onCancel={this.cancelEdit}
+                    onHandleDateChange={this.handleDateChange}
+                    onEditDate={this.editDate}
                     sortValue={sortValue}
                     filterCheck={filterCheck}
                     byDateFromLarge={this.byDateFromLarge}

@@ -66,18 +66,18 @@ class AppItems extends React.Component {
 
         let list = items.map((item) => {
             return <TableRow align="center" styles={{ "width": "100%" }}>
-                <TableCell align="center"><Checkbox onClick={this.props.completeItems.bind(this,item.id)} checked={item.click}  /></TableCell>
+                <TableCell align="center"><Checkbox onClick={this.props.onComplete.bind(this,item.id)} checked={item.click}  /></TableCell>
                 <TableCell  align="left" className={`taskItem ${item.click ? "linethrough" : ""}`} key={item.id}>{item.title}</TableCell>
                 
-                <TableCell align="center"><Button onClick={this.props.setEdit.bind(this,item.id,item)}>EDIT</Button></TableCell>
-                <TableCell aling="center"><Checkbox onClick={this.props.selectItems.bind(this,item.id)} checked={item.select}/></TableCell>
+                <TableCell align="center"><Button onClick={this.props.onSetEdit.bind(this,item.id,item)}>EDIT</Button></TableCell>
+                <TableCell aling="center"><Checkbox onClick={this.props.onSelect.bind(this,item.id)} checked={item.select}/></TableCell>
                 <TableCell align="center">
 
                 {(item.dateValueString === "Invalid date") ? "" : item.dateValueString}
 
                 </TableCell>
                 <TableCell align="center">
-                    <Button className="remove" onClick={this.props.deleteItems.bind(this, item.id)} variant="outlined" color="error" startIcon={<DeleteIcon />}>X</Button>
+                    <Button className="remove" onClick={this.props.onDelete.bind(this, item.id)} variant="outlined" color="error" startIcon={<DeleteIcon />}>X</Button>
                 </TableCell>
             </TableRow>
         });
@@ -89,20 +89,20 @@ class AppItems extends React.Component {
                     <Box className="editItem">
                             <label htmlFor="fname">Edit Item:</label><br />
                         <Box className="editBoxAnddateBox">
-                            <input type="text" id="fname" name="fname" onChange={this.props.handleEditItem.bind(this)}defaultValue={editItem} /><br />
+                            <input type="text" id="fname" name="fname" onChange={this.props.onHandleEditItem.bind(this)}defaultValue={editItem} /><br />
                             <LocalizationProvider dateAdapter={AdapterDateFns}>
                                 <DatePicker
                                  label="SELECT DATE"
                                  value={editDate}
-                                 onChange={this.props.editDate.bind(this)}
+                                 onChange={this.props.onEditDate.bind(this)}
                                  renderInput={(params) => <TextField {...params} />}
                              />
                             </LocalizationProvider>
                         </Box>
                         <br/>
                          <Box>
-                            <Button variant="contained" onClick={this.props.updateItem.bind(this,editId)}>UPDATE</Button>
-                            <Button style={{marginLeft:"10px"}}variant="outlined" onClick={this.props.cancelEdit.bind(this)} color="error">CANCEL</Button>
+                            <Button variant="contained" onClick={this.props.onUpdate.bind(this,editId)}>UPDATE</Button>
+                            <Button style={{marginLeft:"10px"}}variant="outlined" onClick={this.props.onCancel.bind(this)} color="error">CANCEL</Button>
                         </Box>   
                     </Box>
 
