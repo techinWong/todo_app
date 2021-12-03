@@ -13,20 +13,11 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import Box from '@mui/material/Box';
 
-class AppItems extends React.Component {
-    constructor(props) {
-        super(props);
+const AppItems = (props) => {
+    
 
-        this.state = {
-            items: []
-        }
-    }
-
-   
-   
-    render() {
        
-        let { editId , editItem , editDateValue , items , edit , sortValue , filterCheck } = this.props
+        let { editId , editItem , editDateValue , items , edit , sortValue , filterCheck } = props;
 
         localStorage.setItem('data',JSON.stringify(items))
 
@@ -38,11 +29,11 @@ class AppItems extends React.Component {
             items = (filterCheck) ? items1.filter(item => item.date !== null) : items1
         }
         else if(sortValue === '10'){
-            items = items1.sort(this.props.byDateFromLess)
+            items = items1.sort(props.byDateFromLess)
             items = (filterCheck) ? items1.filter(item => item.date !== null) : items1
         }
         else if(sortValue === '20'){
-            items = items1.sort(this.props.byDateFromLarge)
+            items = items1.sort(props.byDateFromLarge)
             items = (filterCheck) ? items1.filter(item => item.date !== null) : items1
         }
 
@@ -66,18 +57,18 @@ class AppItems extends React.Component {
 
         let list = items.map((item) => {
             return <TableRow align="center" styles={{ "width": "100%" }}>
-                <TableCell align="center"><Checkbox onClick={this.props.onComplete.bind(this,item.id)} checked={item.click}  /></TableCell>
+                <TableCell align="center"><Checkbox onClick={props.onComplete.bind(this,item.id)} checked={item.click}  /></TableCell>
                 <TableCell  align="left" className={`taskItem ${item.click ? "linethrough" : ""}`} key={item.id}>{item.title}</TableCell>
                 
-                <TableCell align="center"><Button onClick={this.props.onSetEdit.bind(this,item.id,item)}>EDIT</Button></TableCell>
-                <TableCell aling="center"><Checkbox onClick={this.props.onSelect.bind(this,item.id)} checked={item.select}/></TableCell>
+                <TableCell align="center"><Button onClick={props.onSetEdit.bind(this,item.id,item)}>EDIT</Button></TableCell>
+                <TableCell aling="center"><Checkbox onClick={props.onSelect.bind(this,item.id)} checked={item.select}/></TableCell>
                 <TableCell align="center">
 
                 {(item.dateValueString === "Invalid date") ? "" : item.dateValueString}
 
                 </TableCell>
                 <TableCell align="center">
-                    <Button className="remove" onClick={this.props.onDelete.bind(this, item.id)} variant="outlined" color="error" startIcon={<DeleteIcon />}>X</Button>
+                    <Button className="remove" onClick={props.onDelete.bind(this, item.id)} variant="outlined" color="error" startIcon={<DeleteIcon />}>X</Button>
                 </TableCell>
             </TableRow>
         });
@@ -88,20 +79,20 @@ class AppItems extends React.Component {
                     <Box className="editItem">
                             <label htmlFor="fname">Edit Item:</label><br />
                         <Box className="editBoxAnddateBox">
-                            <input type="text" id="fname" name="fname" onChange={this.props.onHandleEditItem.bind(this)}defaultValue={editItem} /><br />
+                            <input type="text" id="fname" name="fname" onChange={props.onHandleEditItem.bind(this)}defaultValue={editItem} /><br />
                             <LocalizationProvider dateAdapter={AdapterDateFns}>
                                 <DatePicker
                                  label="SELECT DATE"
                                  value={editDateValue}
-                                 onChange={this.props.onEditDate.bind(this)}
+                                 onChange={props.onEditDate.bind(this)}
                                  renderInput={(params) => <TextField {...params} />}
                              />
                             </LocalizationProvider>
                         </Box>
                         <br/>
                          <Box>
-                            <Button variant="contained" onClick={this.props.onUpdate.bind(this,editId)}>UPDATE</Button>
-                            <Button style={{marginLeft:"10px"}}variant="outlined" onClick={this.props.onCancel.bind(this)} color="error">CANCEL</Button>
+                            <Button variant="contained" onClick={props.onUpdate.bind(this,editId)}>UPDATE</Button>
+                            <Button style={{marginLeft:"10px"}}variant="outlined" onClick={props.onCancel.bind(this)} color="error">CANCEL</Button>
                         </Box>   
                     </Box>
 
@@ -115,6 +106,6 @@ class AppItems extends React.Component {
                 </TableContainer>
             )
         }
-    }
+    
 }
 export default AppItems;

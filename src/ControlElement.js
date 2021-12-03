@@ -21,11 +21,11 @@ const ControlElement = () => {
     
       
 
-        let items=[];
+        let item=[];
         const data = localStorage.getItem("data")
         if(data){
             try {
-                items=JSON.parse(data)
+                item=JSON.parse(data)
             } catch (error) {
                 
             }
