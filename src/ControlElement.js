@@ -12,13 +12,14 @@ import FormControl from '@mui/material/FormControl';
 import NativeSelect from '@mui/material/NativeSelect';
 import Box from '@mui/material/Box';
 import Checkbox from '@mui/material/Checkbox';
+import { useState } from 'react';
 
 
 
-class ControlElement extends React.Component{
+const ControlElement = () => {
 
-    constructor(props){
-        super(props);
+    
+      
 
         let items=[];
         const data = localStorage.getItem("data")
@@ -30,166 +31,150 @@ class ControlElement extends React.Component{
             }
         }
 
-        this.state = {
-            items: items,
-            newItem: {},
-            edit:false,
-            editIndex:'',
-            editItem:'',
-            editId: '',
-            dateValue:null,
-            dateValueString: '',
-            menuValue: null,
-            sortValue: '',
-            filterCheck: false,
-        }
+       const [items,setItems] = useState(item);
+       const [newItem,setNewItem] = useState({});
+       const [edit,setEdit] = useState(false);
+       const [editIndex,setEditIndex] = useState('');
+       const [editItem,setEditItem] = useState('');
+       const [editId,setEditId] = useState('');
+       const [dateValue,setDateValue] = useState(null);
+       const [dateValueString,setDateValueString] = useState('');
+       const [menuValue,setMenuValue] = useState(null);
+       const [sortValue,setSortValue] = useState('');
+       const [filterCheck,setFilterCheck] = useState(false);
+       const [editDateValue,setEditDateValue] = useState(null);
 
-        this.clear = this.clear.bind(this);
-        this.deleteItems= this.deleteItems.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.completeItems = this.completeItems.bind(this);
-        this.selectItems = this.selectItems.bind(this);
-        this.changeItems = this.changeItems.bind(this);
-        this.setEdit = this.setEdit.bind(this);
-        this.handleEditItem = this.handleEditItem.bind(this);
-        this.updateItem = this.updateItem.bind(this);
-        this.cancelEdit = this.cancelEdit.bind(this);
-        this.handleDateChange = this.handleDateChange.bind(this);
-        this.editDate = this.editDate.bind(this);
-        this.sortChange = this.sortChange.bind(this);
-        this.filterCheck = this.filterCheck.bind(this);
-        this.byDateFromLarge = this.byDateFromLarge.bind(this);
-        this.byDateFromLess = this.byDateFromLess.bind(this);
+        
 
 
-    }
+    
 
-    byDateFromLess(a, b) {
+    const byDateFromLess = (a, b) => {
         return new Date(a.date).valueOf() - new Date(b.date).valueOf();
     }
-    byDateFromLarge(a, b) {
+    const byDateFromLarge = (a, b) => {
         return new Date(b.date).valueOf() - new Date(a.date).valueOf();
     }
-    filterCheck = (e) => {
-        this.setState({ filterCheck: e.target.checked })
+    const filterChecked = (e) => {
+        setFilterCheck(e.target.checked);
     }
-    sortChange(e) {
-        this.setState({ sortValue: e.target.value})
+    const sortChange = (e) => {
+        setSortValue(e.target.value);
     }
-    editDate = (date) => {
-        this.setState({editDateValue: date})
-    }
-
-    handleDateChange = (date) => {
-        this.setState({
-            dateValue:date,
-            dateValueString: moment(date).format('DD-MM-YYYY')
-        })
+    const editDate = (date) => {
+        setEditDateValue(date);
     }
 
-    handleEditItem(e){
-        this.setState({editItem:e.target.value})
+    const handleDateChange = (date) => {
+        setDateValue(date);
+        setDateValueString(moment(date).format('DD-MM-YYYY'));
     }
 
-    updateItem = (id) => {
-        const item = this.state.items
+    const handleEditItem = (e) => {
+        setEditItem(e.target.value)
+    }
+
+    const updateItem = (id) => {
+        const item = [...items]
         const index = item.findIndex(item => item.id === id)
-        item[index].title = this.state.editItem
-        item[index].date = this.state.editDateValue
-        const dateValue = moment(this.state.editDateValue).format('DD-MM-YYYY')
+        item[index].title = editItem
+        item[index].date = editDateValue
+        const dateValue = moment(editDateValue).format('DD-MM-YYYY')
         item[index].dateValueString = dateValue
-        this.setState({ items: item, edit: false})
+        setItems(item);
+        setEdit(false);
     }
 
-    clear(){
-        this.setState({ items: [], filterCheck: false});
+    const clear = () => {
+        setItems([]);
+        setFilterCheck(false);
     }
 
-    cancelEdit(){
-        this.setState({edit:false})
+    const cancelEdit = () => {
+        setEdit(false);
     }
 
-    setEdit(id,item){
-        this.setState({edit:true , editId:id ,editItem:item.title, editDateValue:item.date})
+    const setEdited = (id,item) => {
+        setEdit(true);
+        setEditId(id);
+        setEditItem(item.title);
+        setEditDateValue(item.date);
     }
 
-    selectItems(id){ //set select of item that have been clicked    from false --> true
-        let item = this.state.items;
+    const selectItems = (id) => { //set select of item that have been clicked    from false --> true
+        let item = [...items];
         const filterArray = item.filter(item => item.id === id)
         const index = item.findIndex(item => item === filterArray[0])
         item[index].select = !item[index].select
-        this.setState({ items: item })
+        setItems(item);
+        console.log(items);
     }
 
-    completeItems(id) {  //set click of item that have been done     from false --> true
-        let item = this.state.items;
+    const completeItems = (id) => {  //set click of item that have been done     from false --> true
+        let item = [...items];
         const filterArray = item.filter(item=>item.id===id)
         const index = item.findIndex(item => item === filterArray[0])
         item[index].click = !item[index].click
-        this.setState({ items: item })
+        setItems(item);
     }
 
-    changeItems(){ //ChangeItems by filterArray
-        var items = this.state.items;
-        const filterArray = items.filter(item => item.select) //filter item that item.select is true
-        console.log(filterArray)
+    const changeItems = () => { //ChangeItems by filterArray
+        var item = [...items];
+        const filterArray = item.filter(item => item.select) //filter item that item.select is true
         if(filterArray.length === 2){
-            let index0 = items.findIndex(item => item.id === filterArray[0].id) 
-            let index1 = items.findIndex(item => item.id === filterArray[1].id)
+            let index0 = item.findIndex(item => item.id === filterArray[0].id) 
+            let index1 = item.findIndex(item => item.id === filterArray[1].id)
             
-            items[index0] = filterArray[1] 
-            items[index1] = filterArray[0]
-            items[index0].select = false
-            items[index1].select = false
+            item[index0] = filterArray[1] 
+            item[index1] = filterArray[0]
+            item[index0].select = false
+            item[index1].select = false
             
-            this.setState({items:items })
+            setItems(item);
         }else{
             alert('Please Select 2 Tasks')
             items.forEach(item => {
                 item.select = false
             })
-            this.setState({items:items})
+            setItems(item);
         }
     }
 
-    deleteItems(id){
-        this.setState({  items: this.state.items.filter(item => item.id !== id) })
-
+    const deleteItems = (id) => {
+        setItems(items.filter(item => item.id !== id));
     }
 
-    handleChange(event){
-        this.setState({newItem:{title:event.target.value , click:false , select:false, date:null, dateValueString: '', id: Math.random()*1000}});
+    const handleChange = (event) => {
+        setNewItem({title:event.target.value , click:false , select:false, date:null, dateValueString: '', id: Math.random()*1000})
     }
 
-    handleSubmit(event){
+    const handleSubmit = (event) => {
         event.preventDefault();
-        if ((this.state.newItem.title === undefined || this.state.newItem.title === '')) {
+        if ((newItem.title === undefined || newItem.title === '')) {
             alert('Please Complete The Task')
         }
         else { //Unshift newItem to item
-            const newItem = this.state.newItem
-            const item = this.state.items
-            newItem.date = this.state.dateValue
-            newItem.dateValueString = this.state.dateValueString
-            this.setState({  newItem: newItem,dateValue: null, dateValueString: '' })
-            item.unshift(newItem)
-            this.setState({ newItem: { title: '' } , items:item} )
+            const newItems = newItem
+            const item = [...items]
+            newItems.date = dateValue
+            newItems.dateValueString = dateValueString
+            setNewItem(newItems);
+            setDateValue(null);
+            setDateValueString('');
+            item.unshift(newItems)
+            setNewItem({ title: '' });
+            setItems(item);
         }
     }
 
-    render(){
-
-        const {items , newItem , selectItems , edit , editIndex , editItem , editId , editDateValue , dateValue , 
-            dateValueString , menuValue , sortValue , filterCheck} = this.state;
 
         return (
             <Box className="list">
-                <form onSubmit={this.handleSubmit} className="todoForm">
+                <form onSubmit={handleSubmit} className="todoForm">
                     <TextField
                         className="newTask"
                         type="text"
-                        onChange={this.handleChange}
+                        onChange={handleChange}
                         value={newItem.title}
                         label="Enter Your Task"
                         id="margin-none"
@@ -198,7 +183,7 @@ class ControlElement extends React.Component{
                         <DatePicker
                             label="SELECT DATE"
                             value={dateValue}
-                            onChange={this.handleDateChange}
+                            onChange={handleDateChange}
                             renderInput={(params) => <TextField {...params} />}
                         />
                     </LocalizationProvider>
@@ -208,7 +193,7 @@ class ControlElement extends React.Component{
                     <label style={{fontSize : "10px" , textAlign:"right" , color:"black"}}>filter by date</label>
                     <Checkbox
                         checked={filterCheck}
-                        onClick={this.filterCheck}
+                        onClick={filterChecked}
                         inputProps={{ 'aria-label': 'controlled' }}
                     />
                     </div>
@@ -218,7 +203,7 @@ class ControlElement extends React.Component{
                                 Sorted
                             </InputLabel>
                             <NativeSelect
-                                onChange={this.sortChange}
+                                onChange={sortChange}
                                 defaultValue={0}
                                 inputProps={{
                                     name: 'typeOfSorted',
@@ -235,31 +220,31 @@ class ControlElement extends React.Component{
                 </form>
                 <AppItems
                     items={items}
-                    onDelete={this.deleteItems}
-                    onComplete={this.completeItems}
-                    onSelect={this.selectItems}
-                    onSetEdit={this.setEdit}
+                    onDelete={deleteItems}
+                    onComplete={completeItems}
+                    onSelect={selectItems}
+                    onSetEdit={setEdited}
                     edit={edit}
                     editId={editId}
                     editItem={editItem}
                     editIndex={editIndex}
                     editDateValue={editDateValue}
-                    onHandleEditItem={this.handleEditItem}
-                    onUpdate={this.updateItem}
-                    onCancel={this.cancelEdit}
-                    onHandleDateChange={this.handleDateChange}
-                    onEditDate={this.editDate}
+                    onHandleEditItem={handleEditItem}
+                    onUpdate={updateItem}
+                    onCancel={cancelEdit}
+                    onHandleDateChange={handleDateChange}
+                    onEditDate={editDate}
                     sortValue={sortValue}
                     filterCheck={filterCheck}
-                    byDateFromLarge={this.byDateFromLarge}
-                    byDateFromLess={this.byDateFromLess}
+                    byDateFromLarge={byDateFromLarge}
+                    byDateFromLess={byDateFromLess}
                 />
                 <br/>
-                <Button style={{color:"white" , border:"1px solid white"}} className="clear" onClick={this.clear} variant="outlined" >Clear the List</Button>
-                <Button style={{marginLeft : "10px"}}className="change" variant="contained" onClick={this.changeItems} disabled={this.state.sortValue === '10' || this.state.sortValue === '20' ? true : false}>SWAP</Button>
+                <Button style={{color:"white" , border:"1px solid white"}} className="clear" onClick={clear} variant="outlined" >Clear the List</Button>
+                <Button style={{marginLeft : "10px"}}className="change" variant="contained" onClick={changeItems} disabled={sortValue === '10' || sortValue === '20' ? true : false}>SWAP</Button>
             </Box>
         );
-    }
+    
 }
 
 export default ControlElement;
