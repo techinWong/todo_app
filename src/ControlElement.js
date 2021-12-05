@@ -72,7 +72,7 @@ const ControlElement = () => {
     }
 
     const handleEditItem = (e) => {
-        setEditItem(e.target.value)
+        setEditItem({...editItem,title:e.target.value})
     }
 
     const updateItem = (id) => {
