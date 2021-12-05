@@ -19,7 +19,7 @@ const AppItems = (props) => {
     
 
        
-        let { editId , editItem , editDateValue , items , edit , sortValue , filterCheck } = props;
+        let {  editItem , items , edit , sortValue , filterCheck } = props;
 
         localStorage.setItem('data',JSON.stringify(items))
 
