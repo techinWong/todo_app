@@ -105,7 +105,7 @@ const ControlElement = () => {
         console.log(items);
     }
 
-    const completeItems = (id) => {  //set click of item that have been done     from false --> true
+    const handleCompleteItems = (id) => {  //set click of item that have been done     from false --> true
         let item = [...items];
         const filterArray = item.filter(item=>item.id===id)
         const index = item.findIndex(item => item === filterArray[0])
@@ -216,7 +216,7 @@ const ControlElement = () => {
                 <AppItems
                     items={items}
                     onDelete={handleDeleteItems}
-                    onComplete={completeItems}
+                    onComplete={handleCompleteItems}
                     onSelect={selectItems}
                     onSetEdit={setEdited}
                     edit={edit}
