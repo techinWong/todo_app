@@ -97,9 +97,7 @@ const ControlElement = () => {
 
     const setEdited = (id,item) => {
         setEdit(true);
-        setEditId(id);
-        setEditItem(item.title);
-        setEditDateValue(item.date);
+        setEditItem({id:id , title:item.title , dateValue:item.date})
     }
 
     const selectItems = (id) => { //set select of item that have been clicked    from false --> true
