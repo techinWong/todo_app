@@ -1,6 +1,5 @@
 import React from "react";
 import Button from '@mui/material/Button';
-import './App.css';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Checkbox from '@mui/material/Checkbox';
 import TableRow from '@mui/material/TableRow';
@@ -12,6 +11,9 @@ import TextField from '@mui/material/TextField';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import Box from '@mui/material/Box';
+
+import './App.css';
+
 
 const AppItems = (props) => {
     
