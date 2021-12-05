@@ -135,7 +135,7 @@ const ControlElement = () => {
         }
     }
 
-    const deleteItems = (id) => {
+    const handleDeleteItems = (id) => {
         setItems(items.filter(item => item.id !== id));
     }
 
@@ -215,7 +215,7 @@ const ControlElement = () => {
                 </form>
                 <AppItems
                     items={items}
-                    onDelete={deleteItems}
+                    onDelete={handleDeleteItems}
                     onComplete={completeItems}
                     onSelect={selectItems}
                     onSetEdit={setEdited}
