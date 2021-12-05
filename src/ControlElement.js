@@ -58,7 +58,7 @@ const ControlElement = () => {
     const sortChange = (e) => {
         setSortValue(e.target.value);
     }
-    const editDate = (date) => {
+    const handleEditDate = (date) => {
         setEditItem({...editItem , dateValue:date});
     }
 
@@ -225,7 +225,7 @@ const ControlElement = () => {
                     onUpdate={updateItem}
                     onCancel={cancelEdit}
                     onHandleDateChange={handleDateChange}
-                    onEditDate={editDate}
+                    onEditDate={handleEditDate}
                     sortValue={sortValue}
                     filterCheck={filterCheck}
                     byDateFromLarge={byDateFromLarge}
