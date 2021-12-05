@@ -96,7 +96,7 @@ const ControlElement = () => {
         setEditItem({id:id , title:item.title , dateValue:item.date})
     }
 
-    const selectItems = (id) => { //set select of item that have been clicked    from false --> true
+    const handleSelectItems = (id) => { //set select of item that have been clicked    from false --> true
         let item = [...items];
         const filterArray = item.filter(item => item.id === id)
         const index = item.findIndex(item => item === filterArray[0])
@@ -217,7 +217,7 @@ const ControlElement = () => {
                     items={items}
                     onDelete={handleDeleteItems}
                     onComplete={handleCompleteItems}
-                    onSelect={selectItems}
+                    onSelect={handleSelectItems}
                     onSetEdit={setEdited}
                     edit={edit}
                     editItem={editItem}
