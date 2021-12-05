@@ -81,11 +81,11 @@ const AppItems = (props) => {
                     <Box className="editItem">
                             <label htmlFor="fname">Edit Item:</label><br />
                         <Box className="editBoxAnddateBox">
-                            <input type="text" id="fname" name="fname" onChange={props.onHandleEditItem.bind(this)}defaultValue={editItem} /><br />
+                            <input type="text" id="fname" name="fname" onChange={props.onHandleEditItem.bind(this)}defaultValue={editItem.title} /><br />
                             <LocalizationProvider dateAdapter={AdapterDateFns}>
                                 <DatePicker
                                  label="SELECT DATE"
-                                 value={editDateValue}
+                                 value={editItem.dateValue}
                                  onChange={props.onEditDate.bind(this)}
                                  renderInput={(params) => <TextField {...params} />}
                              />
@@ -93,7 +93,7 @@ const AppItems = (props) => {
                         </Box>
                         <br/>
                          <Box>
-                            <Button variant="contained" onClick={props.onUpdate.bind(this,editId)}>UPDATE</Button>
+                            <Button variant="contained" onClick={props.onUpdate.bind(this,editItem.id)}>UPDATE</Button>
                             <Button style={{marginLeft:"10px"}}variant="outlined" onClick={props.onCancel.bind(this)} color="error">CANCEL</Button>
                         </Box>   
                     </Box>
