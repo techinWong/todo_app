@@ -63,7 +63,7 @@ const ControlElement = () => {
         setSortValue(e.target.value);
     }
     const editDate = (date) => {
-        setEditDateValue(date);
+        setEditItem({...editItem , dateValue:date});
     }
 
     const handleDateChange = (date) => {
