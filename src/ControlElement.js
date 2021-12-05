@@ -71,7 +71,7 @@ const ControlElement = () => {
         setEditItem({...editItem,title:e.target.value})
     }
 
-    const updateItem = (id) => {
+    const handleUpdateItem = (id) => {
         const item = [...items]
         const index = item.findIndex(item => item.id === id)
         item[index].title = editItem.title
@@ -222,7 +222,7 @@ const ControlElement = () => {
                     edit={edit}
                     editItem={editItem}
                     onHandleEditItem={handleEditItem}
-                    onUpdate={updateItem}
+                    onUpdate={handleUpdateItem}
                     onCancel={cancelEdit}
                     onHandleDateChange={handleDateChange}
                     onEditDate={handleEditDate}
