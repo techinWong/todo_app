@@ -78,9 +78,9 @@ const ControlElement = () => {
     const updateItem = (id) => {
         const item = [...items]
         const index = item.findIndex(item => item.id === id)
-        item[index].title = editItem
-        item[index].date = editDateValue
-        const dateValue = moment(editDateValue).format('DD-MM-YYYY')
+        item[index].title = editItem.title
+        item[index].date = editItem.dateValue
+        const dateValue = moment(editItem.dateValue).format('DD-MM-YYYY')
         item[index].dateValueString = dateValue
         setItems(item);
         setEdit(false);
