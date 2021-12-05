@@ -91,7 +91,7 @@ const ControlElement = () => {
         setEdit(false);
     }
 
-    const setEdited = (id,item) => {
+    const handleSetEdited = (id,item) => {
         setEdit(true);
         setEditItem({id:id , title:item.title , dateValue:item.date})
     }
@@ -218,7 +218,7 @@ const ControlElement = () => {
                     onDelete={handleDeleteItems}
                     onComplete={handleCompleteItems}
                     onSelect={handleSelectItems}
-                    onSetEdit={setEdited}
+                    onSetEdit={handleSetEdited}
                     edit={edit}
                     editItem={editItem}
                     onHandleEditItem={handleEditItem}
