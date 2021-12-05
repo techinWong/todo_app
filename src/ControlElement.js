@@ -87,7 +87,7 @@ const ControlElement = () => {
         setFilterCheck(false);
     }
 
-    const cancelEdit = () => {
+    const handleCancelEdit = () => {
         setEdit(false);
     }
 
@@ -223,7 +223,7 @@ const ControlElement = () => {
                     editItem={editItem}
                     onHandleEditItem={handleEditItem}
                     onUpdate={handleUpdateItem}
-                    onCancel={cancelEdit}
+                    onCancel={handleCancelEdit}
                     onHandleDateChange={handleDateChange}
                     onEditDate={handleEditDate}
                     sortValue={sortValue}
