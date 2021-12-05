@@ -36,7 +36,7 @@ const ControlElement = () => {
        const [newItem,setNewItem] = useState({});
        const [edit,setEdit] = useState(false);
        const [editIndex,setEditIndex] = useState('');
-       const [editItem,setEditItem] = useState('');
+       const [editItem,setEditItem] = useState({});
        const [editId,setEditId] = useState('');
        const [dateValue,setDateValue] = useState(null);
        const [dateValueString,setDateValueString] = useState('');
