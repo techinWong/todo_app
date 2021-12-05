@@ -35,15 +35,11 @@ const ControlElement = () => {
        const [items,setItems] = useState(item);
        const [newItem,setNewItem] = useState({});
        const [edit,setEdit] = useState(false);
-       const [editIndex,setEditIndex] = useState('');
        const [editItem,setEditItem] = useState({});
-       const [editId,setEditId] = useState('');
        const [dateValue,setDateValue] = useState(null);
        const [dateValueString,setDateValueString] = useState('');
-       const [menuValue,setMenuValue] = useState(null);
        const [sortValue,setSortValue] = useState('');
        const [filterCheck,setFilterCheck] = useState(false);
-       const [editDateValue,setEditDateValue] = useState(null);
 
         
 
@@ -224,10 +220,7 @@ const ControlElement = () => {
                     onSelect={selectItems}
                     onSetEdit={setEdited}
                     edit={edit}
-                    editId={editId}
                     editItem={editItem}
-                    editIndex={editIndex}
-                    editDateValue={editDateValue}
                     onHandleEditItem={handleEditItem}
                     onUpdate={updateItem}
                     onCancel={cancelEdit}
