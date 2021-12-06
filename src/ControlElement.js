@@ -14,7 +14,8 @@ import { useState } from 'react';
 
 import './App.css';
 import AppItems from './AppItems';
-
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from "yup";
 
 
 const ControlElement = () => {
