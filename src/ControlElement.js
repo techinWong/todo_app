@@ -18,6 +18,10 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 
 
+const schema = yup.object({
+    task: yup.string().required(),
+  }).required();
+
 const ControlElement = () => {
 
     
