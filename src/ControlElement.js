@@ -189,14 +189,14 @@ const ControlElement = () => {
                     </LocalizationProvider>
                     <Button className="enter" type="submit" variant="contained">Add</Button>
                     <br />
-                    <div className="CheckboxForm">
+                    <Box className="CheckboxForm">
                     <label style={{fontSize : "10px" , textAlign:"right" , color:"black"}}>filter by date</label>
                     <Checkbox
                         checked={filterCheck}
                         onClick={filterChecked}
                         inputProps={{ 'aria-label': 'controlled' }}
                     />
-                    </div>
+                    </Box>
                     <Box sx={{ minWidth: 120 , marginLeft: "10px" }}>
                         <FormControl fullWidth>
                             <InputLabel variant="standard" htmlFor="uncontrolled-native">
