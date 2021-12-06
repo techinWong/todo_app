@@ -11,11 +11,13 @@ import NativeSelect from '@mui/material/NativeSelect';
 import Box from '@mui/material/Box';
 import Checkbox from '@mui/material/Checkbox';
 import { useState } from 'react';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from "yup";
+import { useForm } from 'react-hook-form'
 
 import './App.css';
 import AppItems from './AppItems';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from "yup";
+
 
 
 const schema = yup.object({
@@ -151,11 +153,7 @@ const ControlElement = () => {
     }
 
     const submitForm = (event) => {
-        event.preventDefault();
-        if ((newItem.title === undefined || newItem.title === '')) {
-            alert('Please Complete The Task')
-        }
-        else { //Unshift newItem to item
+        
             const newItems = newItem
             const item = [...items]
             newItems.date = dateValue
@@ -166,7 +164,7 @@ const ControlElement = () => {
             item.unshift(newItems)
             setNewItem({ title: '' });
             setItems(item);
-        }
+        
     }
 
 
