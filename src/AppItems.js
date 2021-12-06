@@ -83,7 +83,14 @@ const AppItems = (props) => {
                     <Box className="editItem">
                             <label htmlFor="fname">Edit Item:</label><br />
                         <Box className="editBoxAnddateBox">
-                            <input type="text" id="fname" name="fname" onChange={props.onHandleEditItem.bind(this)}defaultValue={editItem.title} /><br />
+                            <TextField 
+                             className="editTask"
+                             type="text"
+                             onChange={props.onHandleEditItem.bind(this)}
+                             value={editItem.title}
+                             label="Edit Your Task"
+                            id="margin-none"
+                            />
                             <LocalizationProvider dateAdapter={AdapterDateFns}>
                                 <DatePicker
                                  label="SELECT DATE"
