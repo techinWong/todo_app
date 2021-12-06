@@ -150,7 +150,7 @@ const ControlElement = () => {
         setNewItem({title:event.target.value , click:false , select:false, date:null, dateValueString: '', id: Math.random()*1000})
     }
 
-    const handleSubmit = (event) => {
+    const submitForm = (event) => {
         event.preventDefault();
         if ((newItem.title === undefined || newItem.title === '')) {
             alert('Please Complete The Task')
