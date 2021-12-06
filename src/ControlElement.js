@@ -36,7 +36,9 @@ const ControlElement = () => {
                 
             }
         }
-
+       const { register, handleSubmit, formState:{ errors } } = useForm({
+            resolver: yupResolver(schema)
+          });   
        const [items,setItems] = useState(item);
        const [newItem,setNewItem] = useState({});
        const [edit,setEdit] = useState(false);
