@@ -172,8 +172,8 @@ const ControlElement = () => {
 
         return (
             <Box className="list">
-                <form onSubmit={handleSubmit} className="todoForm">
-                    <TextField
+                <form onSubmit={handleSubmit(submitForm)} className="todoForm">
+                    <TextField {...register("task")}
                         className="newTask"
                         type="text"
                         onChange={handleChange}
