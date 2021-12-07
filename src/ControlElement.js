@@ -26,9 +26,6 @@ const schema = yup.object({
 
 const ControlElement = () => {
 
-    
-      
-
         let item=[];
         const data = localStorage.getItem("data")
         if(data){
@@ -51,10 +48,6 @@ const ControlElement = () => {
        const [filterCheck,setFilterCheck] = useState(false);
 
         
-
-
-    
-
     const byDateFromLess = (a, b) => {
         return new Date(a.date).valueOf() - new Date(b.date).valueOf();
     }
@@ -123,7 +116,7 @@ const ControlElement = () => {
     }
 
     const changeItems = () => { //ChangeItems by filterArray
-        var item = [...items];
+        let item = [...items];
         const filterArray = item.filter(item => item.select) //filter item that item.select is true
         if(filterArray.length === 2){
             let index0 = item.findIndex(item => item.id === filterArray[0].id) 
